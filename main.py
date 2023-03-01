@@ -1,5 +1,5 @@
 import pygame # Импорт модуля пайгейм
-
+import random
 pygame.init()
 
 width = 1366
@@ -59,6 +59,9 @@ while run:
         speedX = -speedX
     if img_rect.right > width:
         speedX = -speedX
+    if img_rect.bottom > height:
+        img_rect.x = random.randint(0, 1366)
+        img_rect.y = 0
 
     pygame.display.update()
 pygame.quit()
