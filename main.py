@@ -1,5 +1,6 @@
-import pygame # Импорт модуля пайгейм
+import pygame  # Импорт модуля пайгейм
 import random
+
 pygame.init()
 
 width = 1366
@@ -7,7 +8,13 @@ height = 768
 fps = 60
 gameName = 'First Project'
 
-screen = pygame.display.set_mode((width, height)) # Создание экрана с заданными размера
+screen = pygame.display.set_mode((width, height))  # Создание экрана с заданными размера
+
+
+def draw_text(sreen, text):
+    font_name = pygame.font.match_font('arial')
+    font = pygame.font.Font(font_name, )
+
 
 BLACK = '#000000'
 WHITE = '#FFFFFF'
@@ -51,6 +58,7 @@ while run:
         platform_rect.x += 10
 
     if img_rect.colliderect(platform_rect):
+        score += 1
         speedY = -speedY
 
     if img_rect.top < 0:
