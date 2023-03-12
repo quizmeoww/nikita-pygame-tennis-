@@ -28,6 +28,21 @@ platform_rect.y = height - 60
 
 speedX = 10
 speedY = 10
+game_rounds = 3
+score = 0
+
+
+
+def draw_text(screen,text,size,x,y,color):
+    font_name = pygame.font.match_font('arial')
+    font = pygame.font.Font(font_name, size)
+    text_image = font.render(text, True, color)
+    text_rect = text_image.get_rect()
+    text_rect.center = (x, y)
+    screen.blit(text_image, text_rect)
+
+
+
 
 clock = pygame.time.Clock()
 run = True
@@ -38,9 +53,11 @@ while run:
             run = False
     key = pygame.key.get_pressed()
 
-    screen.fill(CYAN)
+    screen.fill(WHITE)
     screen.blit(img, img_rect)
     screen.blit(platform, platform_rect)
+    draw_text (screen,'Rounds:' + str(game_rounds), 50, width//2, 30, BLACK)
+    draw_text (screen, 'Score: ' + str(score), 50, 100, 30, BLACK )
 
     img_rect.x += speedX
     img_rect.y += speedY
@@ -52,6 +69,12 @@ while run:
 
     if img_rect.colliderect(platform_rect):
         speedY = -speedY
+        score += 1
+
+
+
+
+
 
     if img_rect.top < 0:
         speedY = -speedY
@@ -59,9 +82,13 @@ while run:
         speedX = -speedX
     if img_rect.right > width:
         speedX = -speedX
-    if img_rect.bottom > height:
-        img_rect.x = random.randint(0, 1366)
+    if img_rect.top > height:
+        game_rounds -= 1
         img_rect.y = 0
+        img_rect.x = random.randint(0, width)
+        if game_rounds == 0:
+            run = False
+            print('Game Over')
 
     pygame.display.update()
 pygame.quit()
