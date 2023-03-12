@@ -33,6 +33,8 @@ score = 0
 
 
 
+
+
 def draw_text(screen,text,size,x,y,color):
     font_name = pygame.font.match_font('arial')
     font = pygame.font.Font(font_name, size)
